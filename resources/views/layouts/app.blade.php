@@ -70,6 +70,9 @@
     <!-- Volt CSS -->
     <link type="text/css" href="{{ asset('/template/css/volt.css') }}" rel="stylesheet">
 
+    {{-- sweetalert --}}
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
+
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 </head>
@@ -89,7 +92,7 @@
 
         @yield('content')
 
-        <footer class="bg-white rounded shadow p-5 mb-4 mt-4">
+        <footer class="bg-white rounded shadow p-5 mb-4 " style="margin-top: 25%">
             <div class="row">
                 <div class="col-12 col-md-4 col-xl-6 mb-4 mb-md-0">
                     <p class="mb-0 text-center text-lg-start">© 2019-<span class="current-year"></span> <a
@@ -157,7 +160,7 @@
 
     <!-- Volt JS -->
     <script src="{{ asset('/template/assets/js/volt.js') }}"></script>
-
+    @stack('scripts')
 
 </body>
 

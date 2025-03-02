@@ -147,7 +147,7 @@
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
             <li class="nav-item   ">
-                <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+                <a href="{{ route('users.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
