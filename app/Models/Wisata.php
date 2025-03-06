@@ -16,6 +16,11 @@ class Wisata extends Model
         'foto' => 'array', // Mengubah JSON ke array
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'id'; // Laravel akan mencari berdasarkan 'id'
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
