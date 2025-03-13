@@ -18,10 +18,31 @@ class WisataController extends Controller
                 ->addIndexColumn()
                 ->addColumn('foto', function ($row) {
                     if ($row->foto) {
-                        $imgUrl = asset('storage/' . json_decode($row->foto)[0]);
-                        return '<a href="' . $imgUrl . '" class="image-popup">
-                                    <img src="' . $imgUrl . '" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
-                                </a>';
+                        $fotoPaths = json_decode($row->foto);
+                        $count = count($fotoPaths);
+
+                        // Start with a container that will be the gallery
+                        $html = '<div class="gallery-' . $row->id . '">';
+
+                        // Show first image as thumbnail
+                        $firstImgUrl = asset('storage/' . $fotoPaths[0]);
+                        $html .= '<a href="' . $firstImgUrl . '" class="image-popup" title="' . $row->judul . ' (1/' . $count . ')">';
+                        $html .= '<img src="' . $firstImgUrl . '" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">';
+                        $html .= '</a>';
+
+                        // Add more badge if there are additional images
+                        if ($count > 1) {
+                            $html .= '<span class="badge bg-info position-relative" style="top: -15px; left: -10px;">+' . ($count - 1) . '</span>';
+
+                            // Add hidden links for all other images to be accessible in the gallery
+                            for ($i = 1; $i < $count; $i++) {
+                                $imgUrl = asset('storage/' . $fotoPaths[$i]);
+                                $html .= '<a href="' . $imgUrl . '" class="d-none" title="' . $row->judul . ' (' . ($i + 1) . '/' . $count . ')"></a>';
+                            }
+                        }
+
+                        $html .= '</div>';
+                        return $html;
                     }
                     return 'No Image';
                 })
@@ -89,24 +110,52 @@ class WisataController extends Controller
             'no_hp' => 'required',
             'jam_buka' => 'required',
             'kota' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if ($request->hasFile('foto')) {
-            // Hapus foto lama
-            if ($wisata->foto) {
-                Storage::delete($wisata->foto);
-            }
+        $data = [
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'no_hp' => $request->no_hp,
+            'jam_buka' => $request->jam_buka,
+            'kota' => $request->kota,
+        ];
 
-            // Upload foto baru
-            $path = $request->file('foto')->store('wisata', 'public');
-            $wisata->foto = $path;
+        // Get existing photos
+        $existingPhotos = json_decode($wisata->foto, true) ?: [];
+
+        // Handle image deletion
+        if ($request->has('delete_images')) {
+            $deleteIndexes = $request->delete_images;
+
+            // Create a new array without the deleted images
+            $updatedPhotos = [];
+            foreach ($existingPhotos as $index => $path) {
+                if (!in_array($index, $deleteIndexes)) {
+                    $updatedPhotos[] = $path;
+                } else {
+                    // Delete the file from storage if needed
+                    if (Storage::disk('public')->exists($path)) {
+                        Storage::disk('public')->delete($path);
+                    }
+                }
+            }
+            $existingPhotos = $updatedPhotos;
         }
 
-        // Update data
-        $wisata->update($request->except('foto'));
+        // Add new photos
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $file) {
+                $existingPhotos[] = $file->store('wisata', 'public');
+            }
+        }
 
-        return redirect()->route('wisata.index')->with('success', 'Data wisata berhasil diperbarui');
+        // If no photos remain and no new ones were uploaded, set to empty array
+        $data['foto'] = !empty($existingPhotos) ? json_encode($existingPhotos) : json_encode([]);
+
+        $wisata->update($data);
+
+        return redirect()->route('wisata.index')->with('success', 'Wisata berhasil diperbarui!');
     }
 
 

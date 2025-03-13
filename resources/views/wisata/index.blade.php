@@ -100,6 +100,39 @@
                     ]
                 });
             });
+
+            $(document).ready(function() {
+                // Function to initialize Magnific Popup for galleries
+                function initMagnificPopup() {
+                    $('[class^="gallery-"]').each(function() {
+                        $(this).magnificPopup({
+                            delegate: 'a',
+                            type: 'image',
+                            gallery: {
+                                enabled: true,
+                                navigateByImgClick: true,
+                                preload: [0, 1]
+                            },
+                            callbacks: {
+                                elementParse: function(item) {
+                                    // For hidden elements that only have href but no content
+                                    if ($(item.el).hasClass('d-none')) {
+                                        item.src = item.el.attr('href');
+                                    }
+                                }
+                            }
+                        });
+                    });
+                }
+
+                // Initialize for initial table load
+                initMagnificPopup();
+
+                // Reinitialize after DataTables redraws
+                $('#wisataTable').on('draw.dt', function() {
+                    initMagnificPopup();
+                });
+            });
         </script>
     @endpush
 @endsection

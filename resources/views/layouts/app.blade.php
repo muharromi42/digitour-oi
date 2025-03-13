@@ -82,7 +82,8 @@
     {{-- image popup --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-
+    <!-- In your layouts/app.blade.php file, add these in the head section -->
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" /> --}}
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
@@ -171,7 +172,8 @@
 
     <!-- Volt JS -->
     <script src="{{ asset('/template/assets/js/volt.js') }}"></script>
-
+    {{-- image popup --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script> --}}
 
     @stack('scripts')
 
