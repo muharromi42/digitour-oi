@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BudayaController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('umkm', UmkmController::class);
     Route::resource('makanan', MakananController::class);
     Route::resource('wisata', WisataController::class);
+    Route::resource('budaya', BudayaController::class);
 
     Route::middleware([AdminMiddleware::class])->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
