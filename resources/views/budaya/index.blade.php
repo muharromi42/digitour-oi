@@ -15,12 +15,6 @@
             </div>
         @endif
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
@@ -122,6 +116,35 @@
             // Reinitialize after DataTables redraws
             $('#budayaTable').on('draw.dt', function() {
                 initMagnificPopup();
+            });
+
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // confirm delete button
+            $('#budayaTable').on('click', '.delete-button', function(event) {
+                event.preventDefault();
+                var form = $(this).closest('form');
+                Swal.fire({
+                    title: 'Yakin?',
+                    text: "Kamu tidak bisa mengulangnya lagi!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: "Batal",
+                    confirmButtonText: 'Ya, hapus data ini!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         </script>
     @endpush

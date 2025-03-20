@@ -132,6 +132,35 @@
                 $('#wisataTable').on('draw.dt', function() {
                     initMagnificPopup();
                 });
+
+                @if (session('success'))
+                    Swal.fire({
+                        title: 'Success!',
+                        text: "{{ session('success') }}",
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+
+                // confirm delete button
+                $('#wisataTable').on('click', '.delete-button', function(event) {
+                    event.preventDefault();
+                    var form = $(this).closest('form');
+                    Swal.fire({
+                        title: 'Yakin?',
+                        text: "Kamu tidak bisa mengulangnya lagi!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        cancelButtonText: "Batal",
+                        confirmButtonText: 'Ya, hapus data ini!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
             });
         </script>
     @endpush
