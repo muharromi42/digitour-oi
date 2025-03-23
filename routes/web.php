@@ -3,6 +3,7 @@
 use App\Http\Controllers\BudayaController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PenginapanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\UserController;
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('makanan', MakananController::class);
     Route::resource('wisata', WisataController::class);
     Route::resource('budaya', BudayaController::class);
+    Route::resource('penginapan', PenginapanController::class);
 
     Route::middleware([AdminMiddleware::class])->group(function () {
         Route::resource('users', UserController::class)->except(['show']);

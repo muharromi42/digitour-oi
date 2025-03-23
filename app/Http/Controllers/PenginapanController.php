@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Wisata;
+use App\Models\Penginapan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
-class WisataController extends Controller
+class PenginapanController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Wisata::with('user')->latest();
+            $data = Penginapan::with('user')->latest();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('foto', function ($row) {
@@ -46,24 +46,30 @@ class WisataController extends Controller
                     }
                     return 'No Image';
                 })
+                ->addColumn('map', function ($row) {
+                    if ($row->map) {
+                        return '<a href="' . $row->map . '" target="_blank" class="btn btn-sm btn-info">Lihat Map</a>';
+                    }
+                    return 'No Map';
+                })
                 ->addColumn('user', fn($row) => $row->user->name)
                 ->addColumn('action', function ($row) {
-                    return '<a href="' . route('wisata.edit', $row->id) . '" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="' . route('wisata.destroy', $row->id) . '" method="POST" style="display:inline;">
+                    return '<a href="' . route('penginapan.edit', $row->id) . '" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="' . route('penginapan.destroy', $row->id) . '" method="POST" style="display:inline;">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-sm btn-danger delete-button">Delete</button>
                             </form>';
                 })
-                ->rawColumns(['foto', 'action'])
+                ->rawColumns(['foto', 'map', 'action'])
                 ->make(true);
         }
 
-        return view('wisata.index');
+        return view('penginapan.index');
     }
 
     public function create()
     {
-        return view('wisata.create');
+        return view('penginapan.create');
     }
 
     public function store(Request $request)
@@ -72,44 +78,47 @@ class WisataController extends Controller
             'judul' => 'required',
             'deskripsi' => 'required',
             'no_hp' => 'required',
-            'jam_buka' => 'required',
-            'kota' => 'required',
+            'waktu_kunjungan' => 'required',
+            'alamat' => 'required',
+            'map' => 'nullable|url',
             'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $fotoPaths = [];
         if ($request->hasFile('foto')) {
             foreach ($request->file('foto') as $file) {
-                $fotoPaths[] = $file->store('wisata', 'public');
+                $fotoPaths[] = $file->store('penginapan', 'public');
             }
         }
 
-        Wisata::create([
+        Penginapan::create([
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'user_id' => Auth::id(),
             'no_hp' => $request->no_hp,
-            'jam_buka' => $request->jam_buka,
-            'kota' => $request->kota,
+            'waktu_kunjungan' => $request->waktu_kunjungan,
+            'alamat' => $request->alamat,
+            'map' => $request->map,
             'foto' => json_encode($fotoPaths),
         ]);
 
-        return redirect()->route('wisata.index')->with('success', 'Wisata berhasil ditambahkan!');
+        return redirect()->route('penginapan.index')->with('success', 'Penginapan berhasil ditambahkan!');
     }
 
-    public function edit(Wisata $wisata)
+    public function edit(Penginapan $penginapan)
     {
-        return view('wisata.edit', compact('wisata'));
+        return view('penginapan.edit', compact('penginapan'));
     }
 
-    public function update(Request $request, Wisata $wisata)
+    public function update(Request $request, Penginapan $penginapan)
     {
         $request->validate([
             'judul' => 'required',
             'deskripsi' => 'required',
             'no_hp' => 'required',
-            'jam_buka' => 'required',
-            'kota' => 'required',
+            'waktu_kunjungan' => 'required',
+            'alamat' => 'required',
+            'map' => 'nullable|url',
             'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -117,12 +126,13 @@ class WisataController extends Controller
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'no_hp' => $request->no_hp,
-            'jam_buka' => $request->jam_buka,
-            'kota' => $request->kota,
+            'waktu_kunjungan' => $request->waktu_kunjungan,
+            'alamat' => $request->alamat,
+            'map' => $request->map,
         ];
 
         // Get existing photos
-        $existingPhotos = json_decode($wisata->foto, true) ?: [];
+        $existingPhotos = json_decode($penginapan->foto, true) ?: [];
 
         // Handle image deletion
         if ($request->has('delete_images')) {
@@ -146,23 +156,21 @@ class WisataController extends Controller
         // Add new photos
         if ($request->hasFile('foto')) {
             foreach ($request->file('foto') as $file) {
-                $existingPhotos[] = $file->store('wisata', 'public');
+                $existingPhotos[] = $file->store('penginapan', 'public');
             }
         }
 
         // If no photos remain and no new ones were uploaded, set to empty array
         $data['foto'] = !empty($existingPhotos) ? json_encode($existingPhotos) : json_encode([]);
 
-        $wisata->update($data);
+        $penginapan->update($data);
 
-        return redirect()->route('wisata.index')->with('success', 'Wisata berhasil diperbarui!');
+        return redirect()->route('penginapan.index')->with('success', 'Penginapan berhasil diperbarui!');
     }
 
-
-
-    public function destroy(Wisata $wisata)
+    public function destroy(Penginapan $penginapan)
     {
-        $wisata->delete();
-        return redirect()->route('wisata.index')->with('success', 'Wisata berhasil dihapus!');
+        $penginapan->delete();
+        return redirect()->route('penginapan.index')->with('success', 'Penginapan berhasil dihapus!');
     }
 }
