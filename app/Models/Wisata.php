@@ -12,9 +12,9 @@ class Wisata extends Model
     protected $table = 'wisata';
     protected $fillable = ['judul', 'deskripsi', 'user_id', 'no_hp', 'jam_buka', 'kota', 'foto'];
 
-    protected $casts = [
-        'foto' => 'array', // Mengubah JSON ke array
-    ];
+    // protected $casts = [
+    //     'foto' => 'array', // Mengubah JSON ke array
+    // ];
 
     public function getRouteKeyName()
     {
