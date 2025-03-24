@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudayaController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PenginapanController;
@@ -12,7 +13,19 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('dashboard.index');
+    return view('home.index');
+});
+
+
+// HOMEPAGE
+Route::get('/home', function () {
+    return view('home.index');
+});
+Route::prefix('home')->group(function () {
+    Route::get('/news', [HomepageController::class, 'news'])->name('home.news');
+    Route::get('/wisata', [HomepageController::class, 'wisata'])->name('home.wisata');
+    Route::get('/umkm', [HomepageController::class, 'umkm'])->name('home.umkm');
+    Route::get('/makanan', [HomepageController::class, 'makanan'])->name('home.makanan');
 });
 
 
@@ -22,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// CRUD
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
