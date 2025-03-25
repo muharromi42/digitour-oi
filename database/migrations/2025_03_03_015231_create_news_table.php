@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi ke users
             $table->string('judul');
+            $table->string('slug')->unique()->nullable();
             $table->text('deskripsi');
             $table->date('tanggal');
             $table->string('foto')->nullable();

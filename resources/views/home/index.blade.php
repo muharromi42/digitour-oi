@@ -131,57 +131,33 @@
                  <div class="title-underline mx-auto"></div>
              </div>
              <div class="row g-4">
-                 <div class="col-lg-4 col-md-6">
-                     <div class="card news-card h-100">
-                         <img src="{{ asset('/storage/images/2.jpg') }}" class="card-img-top" alt="News 1">
-                         <div class="card-body">
-                             <div class="news-date">
-                                 <span class="day">15</span>
-                                 <span class="month">Mar</span>
+                 @foreach ($latestNews as $news)
+                     <div class="col-lg-4 col-md-6">
+                         <div class="card news-card h-100">
+                             @if ($news->foto)
+                                 <img src="{{ asset('storage/' . $news->foto) }}" class="card-img-top"
+                                     alt="{{ $news->judul }}">
+                             @else
+                                 <img src="{{ asset('images/default-news.jpg') }}" class="card-img-top"
+                                     alt="Default News Image">
+                             @endif
+                             <div class="card-body">
+                                 <div class="news-date">
+                                     <span class="day">{{ \Carbon\Carbon::parse($news->tanggal)->format('d') }}</span>
+                                     <span class="month">{{ \Carbon\Carbon::parse($news->tanggal)->format('M') }}</span>
+                                 </div>
+                                 <h5 class="card-title">{{ $news->judul }}</h5>
+                                 <p class="card-text">{{ Str::limit($news->deskripsi, 150) }}</p>
+                                 <a href="{{ route('news.detail', $news->slug) }}" class="btn btn-link text-primary p-0">
+                                     Read More <i class="fas fa-arrow-right ms-1"></i>
+                                 </a>
                              </div>
-                             <h5 class="card-title">News Title Here</h5>
-                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-                                 velit, vulputate eu pharetra nec, mattis ac neque.</p>
-                             <a href="#" class="btn btn-link text-primary p-0">Read More <i
-                                     class="fas fa-arrow-right ms-1"></i></a>
                          </div>
                      </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                     <div class="card news-card h-100">
-                         <img src="{{ asset('/storage/images/2.jpg') }}" class="card-img-top" alt="News 2">
-                         <div class="card-body">
-                             <div class="news-date">
-                                 <span class="day">10</span>
-                                 <span class="month">Mar</span>
-                             </div>
-                             <h5 class="card-title">Another News Title</h5>
-                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-                                 velit, vulputate eu pharetra nec, mattis ac neque.</p>
-                             <a href="#" class="btn btn-link text-primary p-0">Read More <i
-                                     class="fas fa-arrow-right ms-1"></i></a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                     <div class="card news-card h-100">
-                         <img src="{{ asset('/storage/images/2.jpg') }}" class="card-img-top" alt="News 3">
-                         <div class="card-body">
-                             <div class="news-date">
-                                 <span class="day">05</span>
-                                 <span class="month">Mar</span>
-                             </div>
-                             <h5 class="card-title">Third News Title</h5>
-                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-                                 velit, vulputate eu pharetra nec, mattis ac neque.</p>
-                             <a href="#" class="btn btn-link text-primary p-0">Read More <i
-                                     class="fas fa-arrow-right ms-1"></i></a>
-                         </div>
-                     </div>
-                 </div>
+                 @endforeach
              </div>
              <div class="text-center mt-4">
-                 <a href="#" class="btn btn-outline-primary">View All News</a>
+                 <a href="{{ route('home.news') }}" class="btn btn-outline-primary">View All News</a>
              </div>
          </div>
      </section>

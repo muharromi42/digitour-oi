@@ -12,17 +12,22 @@ use App\Http\Controllers\WisataController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home.index');
-});
+// Route::get('/', function () {
+//     return view('home.index');
+// });
 
 
 // HOMEPAGE
-Route::get('/home', function () {
-    return view('home.index');
-});
+// Route::get('/home', function () {
+//     return view('home.index');
+// });
+Route::get('/', [HomepageController::class, 'index'])->name('home');
+
 Route::prefix('home')->group(function () {
     Route::get('/news', [HomepageController::class, 'news'])->name('home.news');
+    // Route::get('/news', [NewsController::class, 'list'])->name('news.list');
+    Route::get('/news/{slug}', [HomepageController::class, 'detail'])->name('news.detail');
+    // wisata
     Route::get('/wisata', [HomepageController::class, 'wisata'])->name('home.wisata');
     Route::get('/umkm', [HomepageController::class, 'umkm'])->name('home.umkm');
     Route::get('/makanan', [HomepageController::class, 'makanan'])->name('home.makanan');
