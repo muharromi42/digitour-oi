@@ -26,7 +26,7 @@ Route::get('/', [HomepageController::class, 'index'])->name('home');
 Route::prefix('home')->group(function () {
     Route::get('/news', [HomepageController::class, 'news'])->name('home.news');
     // Route::get('/news', [NewsController::class, 'list'])->name('news.list');
-    Route::get('/news/{slug}', [HomepageController::class, 'detail'])->name('news.detail');
+    Route::get('/news/{slug}', [HomepageController::class, 'newsDetail'])->name('news.detail');
     // wisata
     Route::get('/wisata', [HomepageController::class, 'wisata'])->name('home.wisata');
     Route::get('/umkm', [HomepageController::class, 'umkm'])->name('home.umkm');

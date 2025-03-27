@@ -61,11 +61,17 @@
                         },
                         {
                             data: 'judul',
-                            name: 'judul'
+                            name: 'judul',
+                            render: function(data) {
+                                return `<div class="d-block text-truncate" style="max-width: 200px;" title="${data}">${data}</div>`;
+                            }
                         },
                         {
                             data: 'deskripsi',
-                            name: 'deskripsi'
+                            name: 'deskripsi',
+                            render: function(data) {
+                                return `<div class="d-block text-truncate" style="max-width: 200px;" title="${data}">${data}</div>`;
+                            }
                         },
                         {
                             data: 'tanggal',

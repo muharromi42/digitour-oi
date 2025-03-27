@@ -24,7 +24,7 @@ class HomepageController extends Controller
         return view('home.news.news', compact('news'));
     }
     // New method to show individual news by slug
-    public function detail($slug)
+    public function newsDetail($slug)
     {
         $news = NewsModel::where('slug', $slug)->firstOrFail();
         return view('home.news.detail', compact('news'));
