@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NewsModel;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -12,7 +12,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $news = NewsModel::with('user')->latest();
+            $news = News::with('user')->latest();
 
             return DataTables::of($news)
                 ->addIndexColumn()
@@ -63,7 +63,7 @@ class NewsController extends Controller
             $fotoPath = $request->file('foto')->store('news_images', 'public');
         }
 
-        NewsModel::create([
+        News::create([
             'user_id' => Auth::id(), // Ambil ID user yang login
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
@@ -74,18 +74,18 @@ class NewsController extends Controller
         return redirect()->route('news.index')->with('success', 'News berhasil ditambahkan!');
     }
 
-    // public function edit(NewsModel $news)
+    // public function edit(News $news)
     public function edit($id)
     {
         // if (Auth::id() !== $news->user_id) {
         //     abort(403, 'Unauthorized action.');
         // }
         // return view('news.edit', compact('news'));
-        $news = NewsModel::findOrFail($id);
+        $news = News::findOrFail($id);
         return view('news.edit', compact('news'));
     }
 
-    public function update(Request $request, NewsModel $news)
+    public function update(Request $request, News $news)
     {
         if (Auth::id() !== $news->user_id) {
             abort(403, 'Unauthorized action.');
@@ -108,7 +108,7 @@ class NewsController extends Controller
         return redirect()->route('news.index')->with('success', 'News berhasil diperbarui!');
     }
 
-    public function destroy(NewsModel $news)
+    public function destroy(News $news)
     {
         if (Auth::id() !== $news->user_id) {
             abort(403, 'Unauthorized action.');

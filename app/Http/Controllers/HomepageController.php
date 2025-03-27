@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NewsModel;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -10,7 +10,7 @@ class HomepageController extends Controller
     public function index()
     {
         // Fetch the 3 most recent news items
-        $latestNews = NewsModel::with('user')
+        $latestNews = News::with('user')
             ->latest()
             ->take(3)
             ->get();
@@ -20,13 +20,13 @@ class HomepageController extends Controller
 
     public function news()
     {
-        $news = NewsModel::with('user')->latest()->paginate(5);
+        $news = News::with('user')->latest()->paginate(5);
         return view('home.news.news', compact('news'));
     }
     // New method to show individual news by slug
     public function newsDetail($slug)
     {
-        $news = NewsModel::where('slug', $slug)->firstOrFail();
+        $news = News::where('slug', $slug)->firstOrFail();
         return view('home.news.detail', compact('news'));
     }
 }
