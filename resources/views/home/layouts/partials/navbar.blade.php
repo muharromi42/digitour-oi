@@ -32,15 +32,18 @@
          <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="navbar-nav ms-auto">
                  <li class="nav-item">
-                     <a class="nav-link active" href="#">Home</a>
+                     <a class="nav-link active" href="{{ route('home') }}">Home</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">About</a>
+                     <a class="nav-link" href="{{ route('home.news') }}">News</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#">Budaya</a>
                  </li>
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                          data-bs-toggle="dropdown">
-                         Services
+                         UMKM
                      </a>
                      <ul class="dropdown-menu">
                          <li><a class="dropdown-item" href="#">Service 1</a></li>
@@ -49,13 +52,10 @@
                      </ul>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="{{ route('home.news') }}">News</a>
+                     <a class="nav-link" href="#">Penginapan</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Gallery</a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">Contact</a>
+                     <a class="nav-link" href="#">Makanan</a>
                  </li>
                  <li class="nav-item border border-primary rounded">
                      <a class="nav-link " href="{{ route('login') }}">Login</a>

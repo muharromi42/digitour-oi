@@ -10,28 +10,28 @@
          <div class="carousel-inner">
              <div class="carousel-item active">
                  <img src="{{ asset('/storage/images/hari-kesehatan-nasional.jpg') }}" class="d-block w-100" alt="Slide 1">
-                 <div class="carousel-caption">
+                 {{-- <div class="carousel-caption">
                      <h1>Welcome to Your Website</h1>
                      <p>Your main tagline goes here</p>
                      <button class="btn btn-primary btn-lg">Learn More</button>
-                 </div>
+                 </div> --}}
              </div>
              <div class="carousel-item">
                  <img src="{{ asset('/storage/images/website-resmi-kecamatan-lubuk-keliat.png') }}" class="d-block w-100"
                      alt="Slide 2">
-                 <div class="carousel-caption">
+                 {{-- <div class="carousel-caption">
                      <h1>Quality Services</h1>
                      <p>Explore what we have to offer</p>
                      <button class="btn btn-primary btn-lg">Our Services</button>
-                 </div>
+                 </div> --}}
              </div>
              <div class="carousel-item">
                  <img src="{{ asset('/storage/images/hari-sumpah-pemuda.jpg') }}" class="d-block w-100" alt="Slide 3">
-                 <div class="carousel-caption">
+                 {{-- <div class="carousel-caption">
                      <h1>Get in Touch</h1>
                      <p>We're here to help</p>
                      <button class="btn btn-primary btn-lg">Contact Us</button>
-                 </div>
+                 </div> --}}
              </div>
          </div>
          <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
@@ -41,6 +41,72 @@
              <span class="carousel-control-next-icon"></span>
          </button>
      </div>
+
+     <!-- News Section -->
+     <section class="news-section py-5">
+         <div class="container">
+             <div class="section-header text-center mb-5">
+                 <h2 class="section-title">Latest News</h2>
+                 <div class="title-underline mx-auto"></div>
+             </div>
+             <div class="row g-4">
+                 @foreach ($latestNews as $news)
+                     <div class="col-lg-4 col-md-6">
+                         <div class="card news-card h-100">
+                             @if ($news->foto)
+                                 <img src="{{ asset('storage/' . $news->foto) }}" class="card-img-top"
+                                     alt="{{ $news->judul }}">
+                             @else
+                                 <img src="{{ asset('images/default-news.jpg') }}" class="card-img-top"
+                                     alt="Default News Image">
+                             @endif
+                             <div class="card-body">
+                                 <div class="news-date">
+                                     <span class="day">{{ \Carbon\Carbon::parse($news->tanggal)->format('d') }}</span>
+                                     <span class="month">{{ \Carbon\Carbon::parse($news->tanggal)->format('M') }}</span>
+                                 </div>
+                                 <h5 class="card-title">{{ $news->judul }}</h5>
+                                 <p class="card-text">{{ Str::limit($news->deskripsi, 150) }}</p>
+                                 <a href="{{ route('news.detail', $news->slug) }}" class="btn btn-link text-primary p-0">
+                                     Read More <i class="fas fa-arrow-right ms-1"></i>
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 @endforeach
+             </div>
+             <div class="text-center mt-4">
+                 <a href="{{ route('home.news') }}" class="btn btn-outline-primary">View All News</a>
+             </div>
+         </div>
+     </section>
+
+
+
+     <!-- About Section -->
+     <section class="about-section py-5 bg-light">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-6">
+                     <h2 class="section-title">About Us</h2>
+                     <div class="title-underline mb-4"></div>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra
+                         nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id.</p>
+                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                         dicta sunt explicabo.</p>
+                     <div class="mt-4">
+                         <a href="#" class="btn btn-primary">Learn More</a>
+                     </div>
+                 </div>
+                 <div class="col-lg-6">
+                     <div class="about-image">
+                         <img src="{{ asset('/storage/images/2.jpg') }}" alt="About Us" class="img-fluid rounded shadow">
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
 
      <!-- Quick Links Section -->
      <section class="quick-links py-5">
@@ -94,70 +160,6 @@
                          </div>
                      </div>
                  </div>
-             </div>
-         </div>
-     </section>
-
-     <!-- About Section -->
-     <section class="about-section py-5 bg-light">
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-6">
-                     <h2 class="section-title">About Us</h2>
-                     <div class="title-underline mb-4"></div>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra
-                         nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id.</p>
-                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                         dicta sunt explicabo.</p>
-                     <div class="mt-4">
-                         <a href="#" class="btn btn-primary">Learn More</a>
-                     </div>
-                 </div>
-                 <div class="col-lg-6">
-                     <div class="about-image">
-                         <img src="{{ asset('/storage/images/2.jpg') }}" alt="About Us" class="img-fluid rounded shadow">
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </section>
-
-     <!-- News Section -->
-     <section class="news-section py-5">
-         <div class="container">
-             <div class="section-header text-center mb-5">
-                 <h2 class="section-title">Latest News</h2>
-                 <div class="title-underline mx-auto"></div>
-             </div>
-             <div class="row g-4">
-                 @foreach ($latestNews as $news)
-                     <div class="col-lg-4 col-md-6">
-                         <div class="card news-card h-100">
-                             @if ($news->foto)
-                                 <img src="{{ asset('storage/' . $news->foto) }}" class="card-img-top"
-                                     alt="{{ $news->judul }}">
-                             @else
-                                 <img src="{{ asset('images/default-news.jpg') }}" class="card-img-top"
-                                     alt="Default News Image">
-                             @endif
-                             <div class="card-body">
-                                 <div class="news-date">
-                                     <span class="day">{{ \Carbon\Carbon::parse($news->tanggal)->format('d') }}</span>
-                                     <span class="month">{{ \Carbon\Carbon::parse($news->tanggal)->format('M') }}</span>
-                                 </div>
-                                 <h5 class="card-title">{{ $news->judul }}</h5>
-                                 <p class="card-text">{{ Str::limit($news->deskripsi, 150) }}</p>
-                                 <a href="{{ route('news.detail', $news->slug) }}" class="btn btn-link text-primary p-0">
-                                     Read More <i class="fas fa-arrow-right ms-1"></i>
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-                 @endforeach
-             </div>
-             <div class="text-center mt-4">
-                 <a href="{{ route('home.news') }}" class="btn btn-outline-primary">View All News</a>
              </div>
          </div>
      </section>
