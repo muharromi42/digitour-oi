@@ -31,6 +31,9 @@ Route::prefix('home')->group(function () {
     Route::get('/wisata', [HomepageController::class, 'wisata'])->name('home.wisata');
     Route::get('/umkm', [HomepageController::class, 'umkm'])->name('home.umkm');
     Route::get('/makanan', [HomepageController::class, 'makanan'])->name('home.makanan');
+    Route::get('/wisata', [HomepageController::class, 'wisata'])->name('home.wisata');
+    // Route::get('/wisata', [wisataController::class, 'list'])->name('wisata.list');
+    Route::get('/wisata/}', [HomepageController::class, 'wisataDetail'])->name('wisata.detail');
 });
 
 

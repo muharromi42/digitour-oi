@@ -81,6 +81,55 @@
          </div>
      </section>
 
+     <!-- Destination Section -->
+     <section class="destination-section py-5">
+         <div class="container">
+             <div class="section-header text-center mb-5">
+                 <h2 class="section-title">Popular Destinations</h2>
+                 <div class="title-underline mx-auto"></div>
+             </div>
+             <div class="row g-4">
+                 @foreach ($latestWisata as $wisata)
+                     <div class="col-lg-4 col-md-6">
+                         <div class="card news-card h-100">
+                             @if ($wisata->foto)
+                                 @php
+                                     //  decode string json menjadi array
+                                     $fotoData = json_decode($wisata->foto);
+                                     // ambil foto pertama saja jika json berbentuk array
+                                     $fotoPath = is_array($fotoData)
+                                         ? $fotoData[0]
+                                         : (isset($fotoData->main)
+                                             ? $fotoData->main
+                                             : $wisata->foto);
+                                 @endphp
+                                 <img src="{{ asset('storage/' . $fotoPath) }}" class="card-img-top"
+                                     alt="{{ $wisata->judul }}">
+                             @else
+                                 <img src="{{ asset('images/default-news.jpg') }}" class="card-img-top"
+                                     alt="Default News Image">
+                             @endif
+                             <div class="card-body">
+                                 <div class="news-date">
+                                     <span class="day">{{ \Carbon\Carbon::parse($wisata->tanggal)->format('d') }}</span>
+                                     <span class="month">{{ \Carbon\Carbon::parse($wisata->tanggal)->format('M') }}</span>
+                                 </div>
+                                 <h5 class="card-title">{{ $wisata->judul }}</h5>
+                                 <p class="card-text">{{ Str::limit($wisata->deskripsi, 150) }}</p>
+                                 <a href="{{ route('wisata.detail', $wisata->slug) }}"
+                                     class="btn btn-link text-primary p-0">
+                                     Read More <i class="fas fa-arrow-right ms-1"></i>
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 @endforeach
+             </div>
+             <div class="text-center mt-4">
+                 <a href="{{ route('home.news') }}" class="btn btn-outline-primary">View All News</a>
+             </div>
+         </div>
+     </section>
 
 
      <!-- About Section -->
@@ -101,7 +150,8 @@
                  </div>
                  <div class="col-lg-6">
                      <div class="about-image">
-                         <img src="{{ asset('/storage/images/2.jpg') }}" alt="About Us" class="img-fluid rounded shadow">
+                         <img src="{{ asset('/storage/images/2.jpg') }}" alt="About Us"
+                             class="img-fluid rounded shadow">
                      </div>
                  </div>
              </div>
