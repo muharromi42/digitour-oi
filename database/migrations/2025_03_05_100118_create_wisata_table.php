@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi ke user
             $table->string('no_hp');
             $table->string('jam_buka');
-            $table->string('kota');
+            $table->string('kategori');
             $table->json('foto'); // Menyimpan banyak foto dalam bentuk JSON
             $table->timestamps();
         });

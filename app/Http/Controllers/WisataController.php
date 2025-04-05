@@ -73,7 +73,7 @@ class WisataController extends Controller
             'deskripsi' => 'required',
             'no_hp' => 'required',
             'jam_buka' => 'required',
-            'kota' => 'required',
+            'kategori' => 'required',
             'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -90,7 +90,7 @@ class WisataController extends Controller
             'user_id' => Auth::id(),
             'no_hp' => $request->no_hp,
             'jam_buka' => $request->jam_buka,
-            'kota' => $request->kota,
+            'kategori' => $request->kategori,
             'foto' => json_encode($fotoPaths),
         ]);
 
@@ -109,7 +109,7 @@ class WisataController extends Controller
             'deskripsi' => 'required',
             'no_hp' => 'required',
             'jam_buka' => 'required',
-            'kota' => 'required',
+            'kategori' => 'required',
             'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -118,7 +118,7 @@ class WisataController extends Controller
             'deskripsi' => $request->deskripsi,
             'no_hp' => $request->no_hp,
             'jam_buka' => $request->jam_buka,
-            'kota' => $request->kota,
+            'kategori' => $request->kategori,
         ];
 
         // Get existing photos

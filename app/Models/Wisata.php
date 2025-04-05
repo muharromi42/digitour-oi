@@ -10,7 +10,7 @@ class Wisata extends Model
     use HasFactory;
 
     protected $table = 'wisata';
-    protected $fillable = ['judul', 'deskripsi', 'user_id', 'no_hp', 'jam_buka', 'kota', 'foto'];
+    protected $fillable = ['judul', 'deskripsi', 'user_id', 'no_hp', 'jam_buka', 'kategori', 'foto'];
 
     // protected $casts = [
     //     'foto' => 'array', // Mengubah JSON ke array

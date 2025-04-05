@@ -90,43 +90,52 @@
              </div>
              <div class="row g-4">
                  @foreach ($latestWisata as $wisata)
-                     <div class="col-lg-4 col-md-6">
-                         <div class="card news-card h-100">
-                             @if ($wisata->foto)
-                                 @php
-                                     //  decode string json menjadi array
-                                     $fotoData = json_decode($wisata->foto);
-                                     // ambil foto pertama saja jika json berbentuk array
-                                     $fotoPath = is_array($fotoData)
-                                         ? $fotoData[0]
-                                         : (isset($fotoData->main)
-                                             ? $fotoData->main
-                                             : $wisata->foto);
-                                 @endphp
-                                 <img src="{{ asset('storage/' . $fotoPath) }}" class="card-img-top"
-                                     alt="{{ $wisata->judul }}">
-                             @else
-                                 <img src="{{ asset('images/default-news.jpg') }}" class="card-img-top"
-                                     alt="Default News Image">
-                             @endif
-                             <div class="card-body">
-                                 <div class="news-date">
-                                     <span class="day">{{ \Carbon\Carbon::parse($wisata->tanggal)->format('d') }}</span>
-                                     <span class="month">{{ \Carbon\Carbon::parse($wisata->tanggal)->format('M') }}</span>
+                     <div class="col-lg-3 col-md-6">
+                         <div class="card news-card h-100 position-relative overflow-hidden" style="border-radius: 10px;">
+                             <!-- Image container with fixed 9:16 aspect ratio -->
+                             <div style="position: relative; padding-top: 177.78%;">
+                                 <!-- 177.78% = 16/9 (for 9:16 ratio) -->
+                                 @if ($wisata->foto)
+                                     @php
+                                         //  decode string json menjadi array
+                                         $fotoData = json_decode($wisata->foto);
+                                         // ambil foto pertama saja jika json berbentuk array
+                                         $fotoPath = is_array($fotoData)
+                                             ? $fotoData[0]
+                                             : (isset($fotoData->main)
+                                                 ? $fotoData->main
+                                                 : $wisata->foto);
+                                     @endphp
+                                     <img src="{{ asset('storage/' . $fotoPath) }}" alt="{{ $wisata->judul }}"
+                                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                                 @else
+                                     <img src="{{ asset('images/default-news.jpg') }}" alt="Default News Image"
+                                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                                 @endif
+                             </div>
+                             <!-- Overlay with gradient for better text visibility -->
+                             <div class="card-img-overlay d-flex flex-column justify-content-between"
+                                 style="background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);">
+                                 <!-- Top text section -->
+                                 <div class="text-center text-white">
+                                     <h4 class="fw-bold mb-0">{{ $wisata->judul }}</h4>
+                                     <p class="small mb-0">Kota {{ $wisata->kota }}</p>
                                  </div>
-                                 <h5 class="card-title">{{ $wisata->judul }}</h5>
-                                 <p class="card-text">{{ Str::limit($wisata->deskripsi, 150) }}</p>
-                                 <a href="{{ route('wisata.detail', $wisata->slug) }}"
-                                     class="btn btn-link text-primary p-0">
-                                     Read More <i class="fas fa-arrow-right ms-1"></i>
-                                 </a>
+
+                                 <!-- Bottom button -->
+                                 <div class="text-center">
+                                     <a href="{{ route('wisata.detail', $wisata->slug) }}"
+                                         class="btn btn-light px-4 fw-medium rounded-pill">
+                                         VIEW DETAIL <i class="fas fa-chevron-right ms-1"></i>
+                                     </a>
+                                 </div>
                              </div>
                          </div>
                      </div>
                  @endforeach
              </div>
              <div class="text-center mt-4">
-                 <a href="{{ route('home.news') }}" class="btn btn-outline-primary">View All News</a>
+                 <a href="{{ route('home.wisata') }}" class="btn btn-outline-primary">View All Destination</a>
              </div>
          </div>
      </section>
