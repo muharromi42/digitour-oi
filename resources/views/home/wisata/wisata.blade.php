@@ -2,7 +2,7 @@
 @section('content')
     <!-- Hero Banner Section with Title -->
     <div class="position-relative">
-        <img src="{{ asset('images/destinations-banner.jpg') }}" class="img-fluid w-100" alt="Destinations Banner"
+        <img src="{{ asset('/storage/images/1.jpg') }}" class="img-fluid w-100" alt="Destinations Banner"
             style="height: 300px; object-fit: cover;">
         <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
             <h1 class="display-4 fw-bold">Destinations</h1>
