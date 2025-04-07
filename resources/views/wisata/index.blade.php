@@ -32,7 +32,7 @@
                                 <th>Pembuat</th>
                                 <th>No HP</th>
                                 <th>Jam Buka</th>
-                                <th>Kota</th>
+                                <th>Kategori</th>
                                 <th>Foto</th>
                                 <th>Aksi</th>
                             </tr>
@@ -82,8 +82,8 @@
                             name: 'jam_buka'
                         },
                         {
-                            data: 'kota',
-                            name: 'kota'
+                            data: 'kategori',
+                            name: 'kategori'
                         },
                         {
                             data: 'foto',

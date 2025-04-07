@@ -59,7 +59,7 @@ class HomepageController extends Controller
 
         // return view('wisata.index', compact('wisata', 'categories', 'cities'));
 
-        $wisata = Wisata::with('user')->latest()->paginate(5);
+        // $wisata = Wisata::with('user')->latest()->paginate(5);
         return view('home.wisata.wisata', compact('wisata', 'categories'));
     }
     // New method to show individual news by slug

@@ -17,7 +17,7 @@
 
     <!-- Search & Filter Section -->
     <div class="container my-4">
-        <form action="{{ route('wisata.index') }}" method="GET" class="row g-3 justify-content-center">
+        <form action="{{ route('home.wisata') }}" method="GET" class="row g-3 justify-content-center">
             <div class="col-md-3">
                 <input type="text" class="form-control" name="keyword" placeholder="Keyword..."
                     value="{{ request('keyword') }}">
@@ -88,7 +88,7 @@
             @empty
                 <div class="col-12 text-center py-5">
                     <h4>No destinations found</h4>
-                    <p>Try adjusting your search filters</p>
+                    {{-- <p>Try adjusting your search filters</p> --}}
                 </div>
             @endforelse
         </div>
