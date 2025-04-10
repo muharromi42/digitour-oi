@@ -124,7 +124,7 @@
 
                                  <!-- Bottom button -->
                                  <div class="text-center">
-                                     <a href="{{ route('wisata.detail', $wisata->slug) }}"
+                                     <a href="{{ route('wisata.detail', $wisata->id) }}"
                                          class="btn btn-light px-4 fw-medium rounded-pill">
                                          VIEW DETAIL <i class="fas fa-chevron-right ms-1"></i>
                                      </a>

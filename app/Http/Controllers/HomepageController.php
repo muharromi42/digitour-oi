@@ -63,9 +63,9 @@ class HomepageController extends Controller
         return view('home.wisata.wisata', compact('wisata', 'categories'));
     }
     // New method to show individual news by slug
-    public function wisataDetail($slug)
+    public function wisataDetail($id)
     {
-        $news = News::where('slug', $slug)->firstOrFail();
-        return view('home.news.detail', compact('news'));
+        $wisata = Wisata::where('id', $id)->firstOrFail();
+        return view('home.wisata.detail', compact('wisata'));
     }
 }

@@ -77,7 +77,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="{{ route('wisata.detail', $destination->slug) }}"
+                                <a href="{{ route('wisata.detail', $destination->id) }}"
                                     class="text-decoration-none text-dark stretched-link">
                                     {{ $destination->judul }}
                                 </a>
