@@ -95,32 +95,30 @@
                 <hr>
                 <!-- Google Maps Section -->
                 @if ($wisata->gmaps_link)
-                    @php
-                        // Convert regular Google Maps URL to embed URL
-                        $mapUrl = $wisata->gmaps_link;
+                @php
+                // Convert regular Google Maps URL to embed URL
+                $mapUrl = $wisata->gmaps_link;
 
-                        // Check if it's already an embed URL
-if (!str_contains($mapUrl, 'output=embed')) {
-    // Check for shortened URL format (goo.gl/maps)
-    if (str_contains($mapUrl, 'goo.gl/maps')) {
-        // For shortened URLs, we'll need to create a generic embed
-                                $mapUrl = 'https://maps.google.com/maps?q=' . urlencode($mapUrl) . '&output=embed';
-                            }
-                            // Check for regular maps.google.com URL
-                            elseif (
-                                str_contains($mapUrl, 'maps.google.com') ||
-                                str_contains($mapUrl, 'google.com/maps')
-                            ) {
-                                // Add output=embed parameter if not present
-                                $mapUrl = $mapUrl . (str_contains($mapUrl, '?') ? '&' : '?') . 'output=embed';
-                            }
-                            // For Google Maps URLs with @location format
-                            elseif (str_contains($mapUrl, 'google.com/maps/place') || str_contains($mapUrl, '@')) {
-                                // Extract the place part and create embed URL
-                                $mapUrl = 'https://www.google.com/maps/embed?pb=' . urlencode($mapUrl);
-                            }
-                        }
-                    @endphp
+                // Check if it's already an embed URL
+                if (!str_contains($mapUrl, 'output=embed')) {
+                    // Check for shortened URL format (goo.gl/maps)
+                    if (str_contains($mapUrl, 'goo.gl/maps')) {
+                        // For shortened URLs, we'll need to create a generic embed
+                        $mapUrl = 'https://maps.google.com/maps?q=' . urlencode($mapUrl) . '&output=embed';
+                    }
+                    // Check for regular maps.google.com URL
+                    elseif (str_contains($mapUrl, 'maps.google.com') || str_contains($mapUrl, 'google.com/maps')) {
+                        // Add output=embed parameter if not present
+                        $mapUrl = $mapUrl . (str_contains($mapUrl, '?') ? '&' : '?') . 'output=embed';
+                    }
+                    // For Google Maps URLs with @location format
+                    elseif (str_contains($mapUrl, 'google.com/maps/place') || str_contains($mapUrl, '@')) {
+                        // Extract the place part and create embed URL
+                        $mapUrl = 'https://www.google.com/maps/embed?pb=' . urlencode($mapUrl);
+                    }
+                }
+            @endphp
+
                 @else
                     <div class="mb-4">
                         <h4>Location</h4>
