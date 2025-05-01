@@ -53,6 +53,15 @@
             </div>
 
             <div class="mb-3">
+                <label for="gmaps" class="form-label">Google Maps</label>
+                <input type="url" class="form-control @error('gmaps') is-invalid @enderror" id="gmaps"
+                    name="gmaps" value="{{ old('gmaps') }}">
+                @error('gmaps')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
                 <label for="foto" class="form-label">Upload Foto</label>
                 <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto[]"
                     multiple>

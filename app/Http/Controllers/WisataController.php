@@ -91,6 +91,7 @@ class WisataController extends Controller
             'no_hp' => $request->no_hp,
             'jam_buka' => $request->jam_buka,
             'kategori' => $request->kategori,
+            'gmaps' => $request->gmaps,
             'foto' => json_encode($fotoPaths),
         ]);
 

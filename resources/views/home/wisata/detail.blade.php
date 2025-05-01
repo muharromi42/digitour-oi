@@ -94,10 +94,9 @@
 
                 <hr>
                 <!-- Google Maps Section -->
-                @if ($wisata->gmaps_link)
-                @php
-                // Convert regular Google Maps URL to embed URL
-                $mapUrl = $wisata->gmaps_link;
+                @if ($wisata->gmaps)
+                    @php
+                        $mapUrl = $wisata->gmaps;
 
                 // Check if it's already an embed URL
                 if (!str_contains($mapUrl, 'output=embed')) {
@@ -119,6 +118,9 @@
                 }
             @endphp
 
+                    <iframe src="{{ $mapUrl }}" width="100%" height="450" style="border:0;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 @else
                     <div class="mb-4">
                         <h4>Location</h4>
@@ -130,6 +132,12 @@
                         </div>
                     </div>
                 @endif
+                {{-- @if ($embedUrl)
+                    <iframe src="{{ $embedUrl }}" width="100%" height="450" style="border:0;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                @else
+                    <p class="text-danger">Peta tidak tersedia atau link tidak valid.</p>
+                @endif --}}
 
 
                 <div class="mt-4 mb-4">

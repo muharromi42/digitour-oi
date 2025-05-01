@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomepageController extends Controller
 {
@@ -62,7 +63,46 @@ class HomepageController extends Controller
         // $wisata = Wisata::with('user')->latest()->paginate(5);
         return view('home.wisata.wisata', compact('wisata', 'categories'));
     }
+
+    // public function convertToEmbedUrl($url)
+    // {
+    //     if (!$url) return null;
+
+    //     // Expand shortened URLs like maps.app.goo.gl
+    //     if (str_contains($url, 'goo.gl/maps') || str_contains($url, 'maps.app.goo.gl')) {
+    //         try {
+    //             $response = Http::withOptions(['allow_redirects' => true])
+    //                 ->get($url);
+
+    //             $url = $response->effectiveUri();
+    //         } catch (\Exception $e) {
+    //             return null;
+    //         }
+    //     }
+
+    //     // If it's already an embed link
+    //     if (str_contains($url, '/embed?pb=')) {
+    //         return $url;
+    //     }
+
+    //     // If it's a place or coordinates link
+    //     if (str_contains($url, 'maps.google.com') || str_contains($url, 'google.com/maps')) {
+    //         return $url . (str_contains($url, '?') ? '&' : '?') . 'output=embed';
+    //     }
+
+    //     // Default fallback using search query
+    //     return 'https://www.google.com/maps?q=' . urlencode($url) . '&output=embed';
+    // }
+
+
     // New method to show individual news by slug
+    // public function wisataDetail($id)
+    // {
+    //     $wisata = Wisata::where('id', $id)->firstOrFail();
+    //     $embedUrl = $this->convertToEmbedUrl($wisata->gmaps);
+    //     return view('home.wisata.detail', compact('wisata', 'embedUrl'));
+    // }
+
     public function wisataDetail($id)
     {
         $wisata = Wisata::where('id', $id)->firstOrFail();
