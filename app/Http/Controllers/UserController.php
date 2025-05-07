@@ -73,4 +73,9 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User berhasil dihapus!');
     }
+
+    public function userProfile()
+    {
+        return view('userProfile.index');
+    }
 }

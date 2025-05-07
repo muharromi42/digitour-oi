@@ -62,6 +62,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware([AdminMiddleware::class])->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
     });
+
+    Route::get('/userProfile', [UserController::class, 'userProfile'])->name('userProfile');
 });
 
 require __DIR__ . '/auth.php';

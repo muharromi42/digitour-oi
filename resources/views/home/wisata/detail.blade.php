@@ -141,7 +141,7 @@
 
 
                 <div class="mt-4 mb-4">
-                    <a href="{{ route('home.wisata') }}" class="btn btn-secondary">Back to News List</a>
+                    <a href="{{ route('home.wisata') }}" class="btn btn-secondary">Back to Wisata List</a>
                 </div>
             </div>
         </div>

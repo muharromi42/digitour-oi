@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('jam_buka');
             $table->string('kategori');
             $table->json('foto'); // Menyimpan banyak foto dalam bentuk JSON
-            $table->text('gmaps');
+            $table->text('gmaps')->nullable();
             $table->timestamps();
         });
     }

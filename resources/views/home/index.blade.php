@@ -85,7 +85,7 @@
      <section class="destination-section py-5">
          <div class="container">
              <div class="section-header text-center mb-5">
-                 <h2 class="section-title">Popular Destinations</h2>
+                 <h2 class="section-title">Destinations</h2>
                  <div class="title-underline mx-auto"></div>
              </div>
              <div class="row g-4">
@@ -446,7 +446,7 @@
          <div class="container-fluid p-0">
              <div class="map-container">
                  <iframe
-                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2157306755366!2d-73.98784468505147!3d40.757921142763696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1sen!2sus!4v1564680003009!5m2!1sen!2sus"
+                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d509787.80214799976!2d104.23039819301822!3d-3.418918986857036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3bc47986a63be5%3A0x7ed8763321e4be3b!2sOgan%20Ilir%20Regency%2C%20South%20Sumatra!5e0!3m2!1sen!2sid!4v1744428599780!5m2!1sen!2sid"
                      width="100%" height="400" style="border:0;" allowfullscreen loading="lazy"></iframe>
              </div>
          </div>
