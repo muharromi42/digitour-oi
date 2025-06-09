@@ -160,7 +160,7 @@
                         aria-expanded="false">
                         <div class="media d-flex align-items-center">
                             <img class="avatar rounded-circle" alt="Image placeholder"
-                                src="{{ asset('/template/assets/img/team/profile-picture-3.jpg') }}">
+                                src="{{ asset('/storage/user-profile/default-user.png') }}">
                             <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small fw-bold text-gray-900">{{ Auth::user()->name }}</span>
                             </div>

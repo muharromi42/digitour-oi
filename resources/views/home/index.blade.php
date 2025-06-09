@@ -159,8 +159,8 @@
                  </div>
                  <div class="col-lg-6">
                      <div class="about-image">
-                         <img src="{{ asset('/storage/images/2.jpg') }}" alt="About Us"
-                             class="img-fluid rounded shadow">
+                         <img src="{{ asset('/storage/images/website-resmi-kecamatan-lubuk-keliat.png') }}"
+                             alt="About Us" class="img-fluid rounded shadow">
                      </div>
                  </div>
              </div>
@@ -168,7 +168,7 @@
      </section>
 
      <!-- Quick Links Section -->
-     <section class="quick-links py-5">
+     {{-- <section class="quick-links py-5">
          <div class="container">
              <div class="row g-4">
                  <div class="col-md-3 col-sm-6">
@@ -221,7 +221,7 @@
                  </div>
              </div>
          </div>
-     </section>
+     </section> --}}
 
      <!-- Video Section -->
      <section class="video-section py-5 bg-light">

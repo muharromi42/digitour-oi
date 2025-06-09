@@ -20,7 +20,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body text-center py-4">
                         <div class="mb-3">
-                            <img src="{{ asset('/storage/images/1.jpg') }}" alt="{{ $user->name }}"
+                            <img src="{{ asset('/storage/user-profile/default-user.png') }}" alt="{{ $user->name }}"
                                 class="rounded-circle img-thumbnail"
                                 style="width: 150px; height: 150px; object-fit: cover;">
                         </div>

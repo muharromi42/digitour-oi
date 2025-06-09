@@ -21,7 +21,8 @@
         <div>
             <a href="/">
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                <img src="{{ asset('/storage/images/logo.png') }}" alt="">
+                <img src="{{ asset('/storage/images/LOGO-DIGITOUR-PORTRAIT.png') }}" class="w-[400px] h-auto"
+                    alt="Logo">
             </a>
         </div>
 
