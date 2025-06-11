@@ -9,6 +9,7 @@ class Wisatadata extends Model
     protected $table = 'wisatadata';
 
     protected $fillable = [
+        'user_id',
         'nama_komersial',
         'tematik_dtw',
         'nama_perusahaan',
@@ -79,4 +80,9 @@ class Wisatadata extends Model
         'sarana_promosi' => 'array',
         'sumberair' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
