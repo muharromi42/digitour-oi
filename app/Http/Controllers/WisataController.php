@@ -166,4 +166,73 @@ class WisataController extends Controller
         $wisata->delete();
         return redirect()->route('wisata.index')->with('success', 'Wisata berhasil dihapus!');
     }
+
+    public function wisatadataIndex()
+    {
+        $wisatas = Wisata::all();
+        return view('wisatadata.index', compact('wisatas'));
+    }
+
+
+    public function wisatadataCreate()
+    {
+        return view('wisatadata.create');
+    }
+
+    public function wisatadataCreate2()
+    {
+        return view('wisatadata.create2');
+    }
+
+    public function wisatadataEdit($id)
+    {
+        $wisata = Wisata::findOrFail($id);
+        return view('wisatadata.edit', compact('wisata'));
+    }
+
+    // Simpan data baru
+    public function wisatadataStore(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            // tambahkan validasi lain sesuai field di tabel wisata
+        ]);
+
+        Wisata::create([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            // isi field lain sesuai request
+        ]);
+
+        return redirect()->route('wisatadata.index')->with('success', 'Data wisata berhasil disimpan.');
+    }
+
+    // Update data existing
+    public function wisatadataUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            // validasi lainnya
+        ]);
+
+        $wisata = Wisata::findOrFail($id);
+        $wisata->update([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            // update field lainnya
+        ]);
+
+        return redirect()->route('wisatadata.index')->with('success', 'Data wisata berhasil diperbarui.');
+    }
+
+    // Hapus data
+    public function wisatadataDestroy($id)
+    {
+        $wisata = Wisata::findOrFail($id);
+        $wisata->delete();
+
+        return redirect()->route('wisatadata.index')->with('success', 'Data wisata berhasil dihapus.');
+    }
 }

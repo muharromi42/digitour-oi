@@ -1,3 +1,13 @@
+<style>
+    .bg-custom {
+        background-color: #584dff;
+        /* atau #d0ebff, #b3d4fc sesuai selera */
+        color: #000 !important;
+        /* teks jadi hitam supaya kontras */
+    }
+</style>
+
+
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
     <a class="navbar-brand me-lg-5" href="{{ asset('/template/index.html') }}">
         <img class="navbar-brand-dark" src="{{ asset('/template/assets/img/brand/light.svg') }}" alt="Volt logo" />
@@ -12,7 +22,7 @@
     </div>
 </nav>
 
-<nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
+<nav id="sidebarMenu" class="sidebar d-lg-block bg-primary text-dark collapse" data-simplebar>
     <div class="sidebar-inner px-4 pt-3">
         {{-- <div
             class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
@@ -51,7 +61,8 @@
         <li class="nav-item">
             <a href="#" class="nav-link d-flex align-items-center">
                 <span class="sidebar-icon">
-                    <img src="{{ asset('/storage/images/LOGO-DIGITOUR-LANDSCAPE-BG.PNG') }}" alt="Digitour Logo">
+                    <img src="{{ asset('/storage/images/01-LANDSCAPE-BG.PNG') }}" class="rounded-circle"
+                        alt="Digitour Logo">
                 </span>
             </a>
         </li>
@@ -115,7 +126,7 @@
                 <span class="sidebar-text">Penginapan</span>
             </a>
         </li>
-        <li class="nav-item   ">
+        {{-- <li class="nav-item   ">
             <a href="../../pages/dashboard/dashboard.html" class="nav-link">
                 <span class="sidebar-icon">
                     <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -136,9 +147,12 @@
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                     </svg>
                 </span>
-                <span class="sidebar-text">Makanan</span>
+                <span class="sidebar-text">Penginapan</span>
             </a>
-        </li>
+        </li> --}}
+
+
+        <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
 
 
         <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
