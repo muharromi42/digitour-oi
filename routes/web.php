@@ -67,7 +67,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route khusus untuk wisatadata (CRUD manual)
     Route::get('/wisatadata', [WisataController::class, 'wisatadataIndex'])->name('wisatadata.index');
     Route::get('/wisatadata/create', [WisataController::class, 'wisatadataCreate'])->name('wisatadata.create');
-    Route::get('/wisatadata/create2', [WisataController::class, 'wisatadataCreate2'])->name('wisatadata.create2');
     Route::get('/wisatadata/{id}/edit', [WisataController::class, 'wisatadataEdit'])->name('wisatadata.edit');
     Route::post('/wisatadata', [WisataController::class, 'wisatadataStore'])->name('wisatadata.store');
     Route::put('/wisatadata/{id}', [WisataController::class, 'wisatadataUpdate'])->name('wisatadata.update');

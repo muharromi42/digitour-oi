@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wisata;
+use App\Models\Wisatadata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -193,19 +194,80 @@ class WisataController extends Controller
     // Simpan data baru
     public function wisatadataStore(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            // tambahkan validasi lain sesuai field di tabel wisata
+        $validatedData = $request->validate([
+            'nama_komersial' => 'required|string',
+            'tematik_dtw' => 'nullable|array',
+            'nama_perusahaan' => 'required|string',
+            'alamat' => 'required|string',
+            'nomor_telepon' => 'required|string',
+            'tahun_mulai_beroperasi' => 'required|date_format:Y',
+            'total_luas_area' => 'nullable|string',
+            'luas_area_wisata' => 'nullable|string',
+            'jam_buka' => 'required|string',
+            'jam_tutup' => 'required|string',
+            'pengunjung_nusantara' => 'nullable|integer',
+            'pengunjung_mancanegara' => 'nullable|integer',
+            'tiket_nusantara' => 'nullable|integer',
+            'tiket_mancanegara' => 'nullable|integer',
+            'durasi_kunjungan' => 'nullable|string',
+            'dokumen_kapasitas' => 'nullable|string',
+            'kapasitas_pengunjung' => 'nullable|integer',
+            'pendidikan_label' => 'nullable|string',
+            'jumlah_pendidikan' => 'nullable|integer',
+            'gender_label' => 'nullable|string',
+            'jumlah_gender' => 'nullable|integer',
+            'pendapatan' => 'nullable|numeric',
+            'pengeluaran' => 'nullable|numeric',
+            'museum_operasional' => 'nullable|array',
+            'aktivitas_alam' => 'nullable|array',
+            'wisata_alam' => 'nullable|array',
+            'wisata_buatan' => 'nullable|array',
+            'wisata_tirta' => 'nullable|array',
+            'hiburan_rekreasi' => 'nullable|array',
+            'metode_pemesanan' => 'nullable|array',
+            'persentase_online' => 'nullable|integer',
+            'metode_pembayaran' => 'nullable|array',
+            'sarana_promosi' => 'nullable|array',
+            'paket_wisata' => 'nullable|in:Ada,Tidak Ada',
+            'luas_area_parkir' => 'nullable|string',
+            'kapasitas_motor' => 'nullable|integer',
+            'kapasitas_mobil' => 'nullable|integer',
+            'kapasitas_bus' => 'nullable|integer',
+            'jumlah_toilet_umum' => 'nullable|integer',
+            'pembagian_toilet' => 'nullable|string',
+            'toilet_khusus' => 'nullable|string',
+            'prosedur_sop' => 'nullable|string',
+            'sop_keamanan_pengunjung' => 'nullable|string',
+            'jalur_evakuasi' => 'nullable|string',
+            'asuransi_pengunjung' => 'nullable|string',
+            'pos_keamanan' => 'nullable|string',
+            'kamera_cctv' => 'nullable|string',
+            'foodservice' => 'nullable|string',
+            'signage' => 'nullable|string',
+            'pusat_informasi' => 'nullable|string',
+            'kotak_saran' => 'nullable|string',
+            'tempat_ibadah' => 'nullable|string',
+            'konsep_3r' => 'nullable|string',
+            'sistem_pengolahan_limbah' => 'nullable|string',
+            'sumberair' => 'nullable|array',
+            'sumberair.*' => 'string',
         ]);
 
-        Wisata::create([
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-            // isi field lain sesuai request
-        ]);
+        // Konversi array ke JSON untuk kolom JSON di database
+        $validatedData['tematik_dtw'] = json_encode($request->tematik_dtw);
+        $validatedData['museum_operasional'] = json_encode($request->museum_operasional);
+        $validatedData['aktivitas_alam'] = json_encode($request->aktivitas_alam);
+        $validatedData['wisata_alam'] = json_encode($request->wisata_alam);
+        $validatedData['wisata_buatan'] = json_encode($request->wisata_buatan);
+        $validatedData['wisata_tirta'] = json_encode($request->wisata_tirta);
+        $validatedData['hiburan_rekreasi'] = json_encode($request->hiburan_rekreasi);
+        $validatedData['metode_pemesanan'] = json_encode($request->metode_pemesanan);
+        $validatedData['metode_pembayaran'] = json_encode($request->metode_pembayaran);
+        $validatedData['sarana_promosi'] = json_encode($request->sarana_promosi);
 
-        return redirect()->route('wisatadata.index')->with('success', 'Data wisata berhasil disimpan.');
+        Wisatadata::create($validatedData);
+
+        return redirect()->back()->with('success', 'Data fasilitas berhasil disimpan.');
     }
 
     // Update data existing
