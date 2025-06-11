@@ -5,7 +5,7 @@
              <div class="col-md-6">
                  <div class="d-flex text-white">
                      <div class="me-3"><i class="fas fa-phone-alt me-1"></i> (123) 456-7890</div>
-                     <div><i class="fas fa-envelope me-1"></i> info@yourwebsite.com</div>
+                     <div><i class="fas fa-envelope me-1"></i> digitour@gmail.com</div>
                  </div>
              </div>
              <div class="col-md-6 text-end">
