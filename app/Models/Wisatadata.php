@@ -10,6 +10,7 @@ class Wisatadata extends Model
 
     protected $fillable = [
         'user_id',
+        'approval',
         'nama_komersial',
         'tematik_dtw',
         'nama_perusahaan',

@@ -81,8 +81,8 @@
                             name: 'user'
                         },
                         {
-                            data: 'user',
-                            name: 'user'
+                            data: 'approval',
+                            name: 'approval'
                         },
                         {
                             data: 'action',

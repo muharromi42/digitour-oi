@@ -71,6 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/wisatadata', [WisataController::class, 'wisatadataStore'])->name('wisatadata.store');
     Route::put('/wisatadata/{id}', [WisataController::class, 'wisatadataUpdate'])->name('wisatadata.update');
     Route::delete('/wisatadata/{id}', [WisataController::class, 'wisatadataDestroy'])->name('wisatadata.destroy');
+    Route::post('wisatadata/{id}/approve', [WisataController::class, 'approve'])->name('wisatadata.approve');
+    Route::post('wisatadata/{id}/reject', [WisataController::class, 'reject'])->name('wisatadata.reject');
 });
 
 require __DIR__ . '/auth.php';

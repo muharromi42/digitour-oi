@@ -206,11 +206,34 @@ class WisataController extends Controller
                 })
                 ->addColumn('user', fn($row) => $row->user->name)
                 ->addColumn('action', function ($row) {
-                    return '<a href="' . route('wisatadata.edit', $row->id) . '" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="' . route('wisatadata.destroy', $row->id) . '" method="POST" style="display:inline;">
-                                ' . csrf_field() . method_field('DELETE') . '
-                                <button type="submit" class="btn btn-sm btn-danger delete-button">Delete</button>
-                            </form>';
+                    $buttons = '<a href="' . route('wisatadata.edit', $row->id) . '" class="btn btn-sm btn-warning">Edit</a> ';
+
+                    // Button Approve dan Reject hanya untuk admin
+                    if (auth()->check() && auth()->user()->role === 'admin') {
+                        // Button Approve - hanya tampil jika status bukan Approve
+                        if ($row->approval !== 'Approve') {
+                            $buttons .= '<form action="' . route('wisatadata.approve', $row->id) . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            <button type="submit" class="btn btn-sm btn-success approve-button">Approve</button>
+                        </form> ';
+                        }
+
+                        // Button Reject - hanya tampil jika status bukan Rejected
+                        if ($row->approval !== 'Rejected') {
+                            $buttons .= '<form action="' . route('wisatadata.reject', $row->id) . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            <button type="submit" class="btn btn-sm btn-secondary reject-button">Reject</button>
+                        </form> ';
+                        }
+                    }
+
+                    // Button Delete
+                    $buttons .= '<form action="' . route('wisatadata.destroy', $row->id) . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-sm btn-danger delete-button">Delete</button>
+                </form>';
+
+                    return $buttons;
                 })
                 ->rawColumns(['foto', 'action'])
                 ->make(true);
@@ -412,5 +435,31 @@ class WisataController extends Controller
         $wisata->delete();
 
         return redirect()->route('wisatadata.index')->with('success', 'Data wisata berhasil dihapus.');
+    }
+
+    public function approve($id)
+    {
+        // Validasi hanya admin yang bisa approve
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            return redirect()->back()->with('error', 'Unauthorized access');
+        }
+
+        $wisatadata = WisataData::findOrFail($id);
+        $wisatadata->update(['approval' => 'Approve']);
+
+        return redirect()->back()->with('success', 'Data berhasil di-approve');
+    }
+
+    public function reject($id)
+    {
+        // Validasi hanya admin yang bisa reject
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            return redirect()->back()->with('error', 'Unauthorized access');
+        }
+
+        $wisatadata = WisataData::findOrFail($id);
+        $wisatadata->update(['approval' => 'Rejected']);
+
+        return redirect()->back()->with('success', 'Data berhasil di-reject');
     }
 }
