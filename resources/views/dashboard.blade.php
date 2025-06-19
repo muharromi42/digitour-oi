@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>dashboard</h1>
+    <h1 style="margin-bottom: 700px">dashboard</h1>
 @endsection

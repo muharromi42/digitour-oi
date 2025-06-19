@@ -4,8 +4,8 @@
          <div class="row">
              <div class="col-md-6">
                  <div class="d-flex text-white">
-                     <div class="me-3"><i class="fas fa-phone-alt me-1"></i> (123) 456-7890</div>
-                     <div><i class="fas fa-envelope me-1"></i> digitour@gmail.com</div>
+                     <div class="me-3"><i class="fas fa-phone-alt me-1"></i> +62 83802521183</div>
+                     <div><i class="fas fa-envelope me-1"></i> ulamrapy@gmail.com</div>
                  </div>
              </div>
              <div class="col-md-6 text-end">
@@ -46,7 +46,7 @@
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                          data-bs-toggle="dropdown">
-                         UMKM
+                         Ekonomi Kreatif / UMKM
                      </a>
                      <ul class="dropdown-menu">
                          <li><a class="dropdown-item" href="#">Service 1</a></li>
@@ -56,9 +56,6 @@
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="#">Penginapan</a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#">Makanan</a>
                  </li>
                  <li class="nav-item border border-primary rounded">
                      <a class="nav-link " href="{{ route('login') }}">Login</a>

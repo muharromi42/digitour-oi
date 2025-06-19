@@ -9,7 +9,7 @@
          </div>
          <div class="carousel-inner">
              <div class="carousel-item active">
-                 <img src="{{ asset('/storage/images/hari-kesehatan-nasional.jpg') }}" class="d-block w-100" alt="Slide 1">
+                 <img src="{{ asset('/storage/images/homepage1.jpg') }}" class="d-block w-100" alt="Slide 1">
                  {{-- <div class="carousel-caption">
                      <h1>Welcome to Your Website</h1>
                      <p>Your main tagline goes here</p>
@@ -17,8 +17,7 @@
                  </div> --}}
              </div>
              <div class="carousel-item">
-                 <img src="{{ asset('/storage/images/website-resmi-kecamatan-lubuk-keliat.png') }}" class="d-block w-100"
-                     alt="Slide 2">
+                 <img src="{{ asset('/storage/images/homepage2.jpg') }}" class="d-block w-100" alt="Slide 2">
                  {{-- <div class="carousel-caption">
                      <h1>Quality Services</h1>
                      <p>Explore what we have to offer</p>
@@ -26,7 +25,7 @@
                  </div> --}}
              </div>
              <div class="carousel-item">
-                 <img src="{{ asset('/storage/images/hari-sumpah-pemuda.jpg') }}" class="d-block w-100" alt="Slide 3">
+                 <img src="{{ asset('/storage/images/homepage3.jpg') }}" class="d-block w-100" alt="Slide 3">
                  {{-- <div class="carousel-caption">
                      <h1>Get in Touch</h1>
                      <p>We're here to help</p>

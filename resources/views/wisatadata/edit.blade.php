@@ -807,19 +807,19 @@
 
                 <select name="sumberair[]" id="sumberair" class="form-select select2" multiple>
                     <option value="PDAM"
-                        {{ in_array('PDAM', old('sumberair', json_decode($wisatadata->sumberair, true) ?? [])) ? 'selected' : '' }}>
+                        {{ in_array('PDAM', old('sumberair', is_array($wisatadata->sumberair ?? []) ? $wisatadata->sumberair : json_decode($wisatadata->sumberair ?? '[]', true))) ? 'selected' : '' }}>
                         PDAM
                     </option>
                     <option value="Pegunungan"
-                        {{ in_array('Pegunungan', old('sumberair', json_decode($wisatadata->sumberair, true) ?? [])) ? 'selected' : '' }}>
+                        {{ in_array('Pegunungan', old('sumberair', is_array($wisatadata->sumberair ?? []) ? $wisatadata->sumberair : json_decode($wisatadata->sumberair ?? '[]', true))) ? 'selected' : '' }}>
                         Pegunungan
                     </option>
                     <option value="Sumur"
-                        {{ in_array('Sumur', old('sumberair', json_decode($wisatadata->sumberair, true) ?? [])) ? 'selected' : '' }}>
+                        {{ in_array('Sumur', old('sumberair', is_array($wisatadata->sumberair ?? []) ? $wisatadata->sumberair : json_decode($wisatadata->sumberair ?? '[]', true))) ? 'selected' : '' }}>
                         Sumur
                     </option>
                     <option value="Lainnya"
-                        {{ in_array('Lainnya', old('sumberair', json_decode($wisatadata->sumberair, true) ?? [])) ? 'selected' : '' }}>
+                        {{ in_array('Lainnya', old('sumberair', is_array($wisatadata->sumberair ?? []) ? $wisatadata->sumberair : json_decode($wisatadata->sumberair ?? '[]', true))) ? 'selected' : '' }}>
                         Lainnya
                     </option>
                 </select>
