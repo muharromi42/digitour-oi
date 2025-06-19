@@ -70,7 +70,10 @@
                         },
                         {
                             data: 'alamat',
-                            name: 'alamat'
+                            name: 'alamat',
+                            render: function(data) {
+                                return `<div class="d-block text-truncate" style="max-width: 200px;" title="${data}">${data}</div>`;
+                            }
                         },
                         {
                             data: 'nomor_telepon',
