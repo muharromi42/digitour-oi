@@ -158,7 +158,7 @@
                  </div>
                  <div class="col-lg-6">
                      <div class="about-image">
-                         <img src="{{ asset('/storage/images/website-resmi-kecamatan-lubuk-keliat.png') }}" alt="About Us"
+                         <img src="{{ asset('/storage/images/homepage2.jpg') }}" alt="About Us"
                              class="img-fluid rounded shadow">
                      </div>
                  </div>

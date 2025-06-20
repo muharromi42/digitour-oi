@@ -41,9 +41,9 @@
                      <a class="nav-link" href="{{ route('home.wisata') }}">Wisata</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Budaya</a>
+                     <a class="nav-link" href="{{ route('home.budaya') }}">Budaya</a>
                  </li>
-                 <li class="nav-item dropdown">
+                 {{-- <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                          data-bs-toggle="dropdown">
                          Ekonomi Kreatif / UMKM
@@ -53,9 +53,12 @@
                          <li><a class="dropdown-item" href="#">Service 2</a></li>
                          <li><a class="dropdown-item" href="#">Service 3</a></li>
                      </ul>
+                 </li> --}}
+                 <li class="nav-item">
+                     <a class="nav-link" href="{{ route('home.umkm') }}">Ekonomi Kreatif / UMKM</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Penginapan</a>
+                     <a class="nav-link" href="{{ route('home.penginapan') }}">Penginapan</a>
                  </li>
                  <li class="nav-item border border-primary rounded">
                      <a class="nav-link " href="{{ route('login') }}">Login</a>

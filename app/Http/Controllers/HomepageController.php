@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budaya;
 use App\Models\News;
+use App\Models\Penginapan;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -107,5 +109,80 @@ class HomepageController extends Controller
     {
         $wisata = Wisata::where('id', $id)->firstOrFail();
         return view('home.wisata.detail', compact('wisata'));
+    }
+
+    public function budaya(Request $request)
+    {
+        $query = Budaya::query();
+
+        // Apply filters
+        if ($request->filled('keyword')) {
+            $query->where('judul', 'like', '%' . $request->keyword . '%')
+                ->orWhere('deskripsi', 'like', '%' . $request->keyword . '%');
+        }
+
+
+
+        $budaya = $query->paginate(9);
+
+
+        return view('home.budaya.budaya', compact('budaya'));
+    }
+
+
+    public function budayaDetail($id)
+    {
+        $budaya = Budaya::where('id', $id)->firstOrFail();
+        return view('home.budaya.detail', compact('budaya'));
+    }
+
+    public function penginapan(Request $request)
+    {
+        $query = Penginapan::query();
+
+        // Apply filters
+        if ($request->filled('keyword')) {
+            $query->where('judul', 'like', '%' . $request->keyword . '%')
+                ->orWhere('deskripsi', 'like', '%' . $request->keyword . '%');
+        }
+
+
+
+        $penginapan = $query->paginate(9);
+
+
+        return view('home.penginapan.penginapan', compact('penginapan'));
+    }
+
+
+    public function penginapanDetail($id)
+    {
+        $penginapan = Penginapan::where('id', $id)->firstOrFail();
+        return view('home.penginapan.detail', compact('penginapan'));
+    }
+
+    public function umkm(Request $request)
+    {
+        $query = Umkm::query();
+
+        // Apply filters
+        if ($request->filled('keyword')) {
+            $query->where('judul', 'like', '%' . $request->keyword . '%')
+                ->orWhere('deskripsi', 'like', '%' . $request->keyword . '%');
+        }
+
+
+
+        $umkm = $query->paginate(9);
+
+
+        return view('home.umkm.umkm', compact('umkm'));
+    }
+
+
+    public function umkmDetail($id)
+    {
+        $umkm = umkm::where('id', $id)->firstOrFail();
+        return view('home.umkm.detail', compact('umkm'));
     }
 }
