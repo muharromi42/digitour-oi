@@ -13,7 +13,12 @@ class PenginapanController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Penginapan::with('user')->latest();
+            // Cek apakah user adalah admin
+            if (Auth::user()->role === 'admin') {
+                $data = Penginapan::with('user')->latest();
+            } else {
+                $data = Penginapan::with('user')->where('user_id', Auth::id())->latest();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('foto', function ($row) {

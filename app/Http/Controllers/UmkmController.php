@@ -15,7 +15,12 @@ class UmkmController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Umkm::with('user')->latest();
+            // Cek apakah user adalah admin
+            if (Auth::user()->role === 'admin') {
+                $data = Umkm::with('user')->latest();
+            } else {
+                $data = Umkm::with('user')->where('user_id', Auth::id())->latest();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('foto', function ($row) {

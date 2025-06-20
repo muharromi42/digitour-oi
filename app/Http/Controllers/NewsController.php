@@ -12,7 +12,12 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $news = News::with('user')->latest();
+            // Cek apakah user adalah admin
+            if (Auth::user()->role === 'admin') {
+                $news = News::with('user')->latest();
+            } else {
+                $news = News::with('user')->where('user_id', Auth::id())->latest();
+            }
 
             return DataTables::of($news)
                 ->addIndexColumn()
