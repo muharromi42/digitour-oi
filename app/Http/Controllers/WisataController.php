@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class WisataController extends Controller
 {
@@ -461,5 +462,42 @@ class WisataController extends Controller
         $wisatadata->update(['approval' => 'Rejected']);
 
         return redirect()->back()->with('success', 'Data berhasil di-reject');
+    }
+
+    // public function generatePdf()
+    // {
+    //     $wisataData = WisataData::all();
+
+    //     $pdf = Pdf::loadView('wisatadata.pdf', compact('wisataData'));
+    //     return $pdf->download('wisata-data.pdf');
+    // }
+
+    public function pdf(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Wisatadata::with('user')->latest();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('user', fn($row) => $row->user->name)
+                ->addColumn('action', function ($row) {
+                    $buttons = '<a href="' . route('wisatadata.singlepdf', $row->id) . '" target="_blank" class="btn btn-danger btn-sm">
+        <i class="fas fa-file-pdf"></i> PDF
+    </a>';
+
+                    return $buttons;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('wisatadata.pdf');
+    }
+
+    public function generateSinglePdf($id)
+    {
+        $wisata = Wisatadata::findOrFail($id);
+
+        return Pdf::loadView('wisatadata.single-pdf', compact('wisata'))
+            ->setPaper('a4', 'portrait')
+            ->download("profil-wisata-{$wisata->id}.pdf");
     }
 }

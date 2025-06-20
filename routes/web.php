@@ -82,6 +82,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/wisatadata/{id}', [WisataController::class, 'wisatadataDestroy'])->name('wisatadata.destroy');
     Route::post('wisatadata/{id}/approve', [WisataController::class, 'approve'])->name('wisatadata.approve');
     Route::post('wisatadata/{id}/reject', [WisataController::class, 'reject'])->name('wisatadata.reject');
+    Route::get('/wisatadata/pdf', [WisataController::class, 'pdf'])->name('wisatadata.pdf');
+    Route::get('/wisatadata/{id}/pdf', [WisataController::class, 'generateSinglePdf'])->name('wisatadata.singlepdf');
 });
 
 require __DIR__ . '/auth.php';
