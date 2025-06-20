@@ -84,6 +84,8 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" /> --}}
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 
 </head>
 
