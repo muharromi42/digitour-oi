@@ -17,13 +17,13 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
-                    Penginapan
+                    umkm
                 </h5>
-                <a href="{{ route('penginapan.create') }}" class="btn btn-primary mb-3">Tambah Penginapan</a>
+                <a href="{{ route('umkm.create') }}" class="btn btn-primary mb-3">Tambah umkm</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="penginapanTable" width="100%">
+                    <table class="table" id="umkmTable" width="100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -52,10 +52,10 @@
     @push('scripts')
         <script type="text/javascript">
             $(function() {
-                $('#penginapanTable').DataTable({
+                $('#umkmTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('penginapan.index') }}",
+                    ajax: "{{ route('umkm.index') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex',
@@ -136,7 +136,7 @@
                 initMagnificPopup();
 
                 // Reinitialize after DataTables redraws
-                $('#penginapanTable').on('draw.dt', function() {
+                $('#umkmTable').on('draw.dt', function() {
                     initMagnificPopup();
                 });
 
@@ -150,7 +150,7 @@
                 @endif
 
                 // confirm delete button
-                $('#penginapanTable').on('click', '.delete-button', function(event) {
+                $('#umkmTable').on('click', '.delete-button', function(event) {
                     event.preventDefault();
                     var form = $(this).closest('form');
                     Swal.fire({

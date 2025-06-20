@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Budaya;
 use App\Models\News;
 use App\Models\Penginapan;
+use App\Models\Umkm;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -182,7 +183,7 @@ class HomepageController extends Controller
 
     public function umkmDetail($id)
     {
-        $umkm = umkm::where('id', $id)->firstOrFail();
+        $umkm = Umkm::where('id', $id)->firstOrFail();
         return view('home.umkm.detail', compact('umkm'));
     }
 }

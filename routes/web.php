@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudayaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\NewsController;
@@ -51,9 +52,11 @@ Route::middleware('auth')->group(function () {
 
 // CRUD
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Route::get('/news', [NewsController::class, 'index'])->name('news');
     // Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm');
