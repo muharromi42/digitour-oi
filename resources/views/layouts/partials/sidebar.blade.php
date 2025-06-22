@@ -210,7 +210,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{ route('penginapandata.index') }}">
                             <span class="sidebar-text">Data Penginapan</span>
                         </a>
                     </li>
@@ -257,7 +257,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{ route('penginapandata.pdf') }}">
                             <span class="sidebar-text">Data Penginapan</span>
                         </a>
                     </li>

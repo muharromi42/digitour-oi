@@ -96,6 +96,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('umkmdata/{id}/reject', [UmkmController::class, 'reject'])->name('umkmdata.reject');
     Route::get('/umkmdata/pdf', [UmkmController::class, 'pdf'])->name('umkmdata.pdf');
     Route::get('/umkmdata/{id}/pdf', [UmkmController::class, 'generateSinglePdf'])->name('umkmdata.singlepdf');
+
+    // Route khusus untuk penginapandata (CRUD manual)
+    Route::get('/penginapandata', [PenginapanController::class, 'penginapandataIndex'])->name('penginapandata.index');
+    Route::get('/penginapandata/create', [PenginapanController::class, 'penginapandataCreate'])->name('penginapandata.create');
+    Route::get('/penginapandata/{id}/edit', [PenginapanController::class, 'penginapandataEdit'])->name('penginapandata.edit');
+    Route::post('/penginapandata', [PenginapanController::class, 'penginapandataStore'])->name('penginapandata.store');
+    Route::put('/penginapandata/{id}', [PenginapanController::class, 'penginapandataUpdate'])->name('penginapandata.update');
+    Route::delete('/penginapandata/{id}', [PenginapanController::class, 'penginapandataDestroy'])->name('penginapandata.destroy');
+    Route::post('penginapandata/{id}/approve', [PenginapanController::class, 'approve'])->name('penginapandata.approve');
+    Route::post('penginapandata/{id}/reject', [PenginapanController::class, 'reject'])->name('penginapandata.reject');
+    Route::get('/penginapandata/pdf', [PenginapanController::class, 'pdf'])->name('penginapandata.pdf');
+    Route::get('/penginapandata/{id}/pdf', [PenginapanController::class, 'generateSinglePdf'])->name('penginapandata.singlepdf');
 });
 
 require __DIR__ . '/auth.php';
