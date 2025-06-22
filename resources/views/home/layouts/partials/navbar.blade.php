@@ -12,7 +12,8 @@
                  <div class="social-icons">
                      <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
                      <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                     <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                     <a href="https://www.instagram.com/rappy_blank12/" class="text-white me-2"><i
+                             class="fab fa-instagram"></i></a>
                      <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
                  </div>
              </div>
