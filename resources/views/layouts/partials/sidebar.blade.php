@@ -205,7 +205,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{ route('umkmdata.index') }}">
                             <span class="sidebar-text">Data Ekonomi Kreatif</span>
                         </a>
                     </li>
@@ -252,7 +252,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{ route('umkmdata.pdf') }}">
                             <span class="sidebar-text">Data Ekonomi Kreatif</span>
                         </a>
                     </li>

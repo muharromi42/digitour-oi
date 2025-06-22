@@ -84,6 +84,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('wisatadata/{id}/reject', [WisataController::class, 'reject'])->name('wisatadata.reject');
     Route::get('/wisatadata/pdf', [WisataController::class, 'pdf'])->name('wisatadata.pdf');
     Route::get('/wisatadata/{id}/pdf', [WisataController::class, 'generateSinglePdf'])->name('wisatadata.singlepdf');
+
+    // Route khusus untuk umkmdata (CRUD manual)
+    Route::get('/umkmdata', [UmkmController::class, 'umkmdataIndex'])->name('umkmdata.index');
+    Route::get('/umkmdata/create', [UmkmController::class, 'umkmdataCreate'])->name('umkmdata.create');
+    Route::get('/umkmdata/{id}/edit', [UmkmController::class, 'umkmdataEdit'])->name('umkmdata.edit');
+    Route::post('/umkmdata', [UmkmController::class, 'umkmdataStore'])->name('umkmdata.store');
+    Route::put('/umkmdata/{id}', [UmkmController::class, 'umkmdataUpdate'])->name('umkmdata.update');
+    Route::delete('/umkmdata/{id}', [UmkmController::class, 'umkmdataDestroy'])->name('umkmdata.destroy');
+    Route::post('umkmdata/{id}/approve', [UmkmController::class, 'approve'])->name('umkmdata.approve');
+    Route::post('umkmdata/{id}/reject', [UmkmController::class, 'reject'])->name('umkmdata.reject');
+    Route::get('/umkmdata/pdf', [UmkmController::class, 'pdf'])->name('umkmdata.pdf');
+    Route::get('/umkmdata/{id}/pdf', [UmkmController::class, 'generateSinglePdf'])->name('umkmdata.singlepdf');
 });
 
 require __DIR__ . '/auth.php';
